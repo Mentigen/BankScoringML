@@ -21,7 +21,7 @@ from sklearn.metrics import (
 )
 
 # Set plot styling for better visualization
-sns.set(style="whitegrid")
+sns.set_theme(style="whitegrid")
 plt.rcParams['figure.figsize'] = (12, 8)
 plt.rcParams['font.size'] = 12
 
