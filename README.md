@@ -2,84 +2,88 @@
 
 ![Credit Scoring](https://img.shields.io/badge/Machine%20Learning-Credit%20Scoring-blue)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-brightgreen)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-ff4b4b)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-## Project Overview
+## Overview
+A machine learning pipeline to predict loan default probability, with:
+- A CLI script for full analysis and artifact generation
+- A Streamlit dashboard for interactive EDA, model training, metrics, and live predictions
 
-This project builds a machine learning model to predict the probability of loan default by bank clients. Credit scoring models are crucial for financial institutions to assess credit risk and make informed lending decisions.
+## Project Structure
+- credit_scoring.py — CLI pipeline: EDA, preprocessing, training, metrics, plots
+- credit_scoring_app.py — Streamlit dashboard (upload CSV → explore → train → evaluate → predict)
+- CreditScoring.ipynb — Original notebook (will be removed later)
 
 ## Dataset
-
-The dataset contains various financial and personal attributes of borrowers, including:
-
-- Revolving credit utilization
-- Age
-- Payment history
-- Debt ratio
-- Monthly income
-- Number of dependents
-- And more...
-
-The target variable indicates whether a borrower experienced a 90+ day delinquency.
+Typical columns:
+- SeriousDlqin2yrs (target: 0/1)
+- age, DebtRatio, MonthlyIncome, NumberOfDependents
+- Payment delinquency counts, utilization metrics, etc.
 
 ## Features
+- EDA: distributions, correlation matrix
+- Preprocessing: missing values, basic encoding for categoricals
+- Modeling: Logistic Regression baseline
+- Evaluation: confusion matrix, ROC AUC, PR curve, classification report
+- Feature importance (coefficients)
+- Streamlit app: upload data, interactively analyze and predict
 
-- Comprehensive exploratory data analysis
-- Data preprocessing and feature engineering
-- Machine learning model development
-- Model evaluation with multiple metrics
-- Feature importance analysis
+## Requirements
+```bash
+pip install -r requirements.txt
+```
+Main libraries: numpy, pandas, seaborn, matplotlib, scikit-learn, streamlit.
 
-## Technologies Used
+## Dependencies and requirements.txt
+Keep and commit requirements.txt for reproducible installs (local, CI, deployment).
 
-- **Python 3.8+**
-- **Data Analysis**: NumPy, Pandas
-- **Visualization**: Matplotlib, Seaborn
-- **Machine Learning**: Scikit-learn
+- Create and activate a virtual environment:
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install --upgrade pip
+```
 
-## Getting Started
-
-### Prerequisites
-
+- Install dependencies from the repo file:
 ```bash
 pip install -r requirements.txt
 ```
 
-### Running the Analysis
+- Update requirements.txt after changing packages:
+```bash
+pip freeze > requirements.txt
+```
 
-Execute the Python script:
+## Quick Start
 
+CLI (generates plots and metrics to files):
 ```bash
 python credit_scoring.py
 ```
 
-This will perform the complete analysis pipeline and generate visualization files in the current directory.
+Streamlit app:
+```bash
+streamlit run credit_scoring_app.py
+```
 
-## Results
+## Using the Streamlit App
+1. Upload a CSV containing SeriousDlqin2yrs and features.
+2. Explore: target distribution, numeric distributions, correlation matrix.
+3. Train: one-click Logistic Regression with stratified split.
+4. Evaluate: confusion matrix, ROC AUC, classification report, top features.
+5. Predict: input feature values and get default probability with a simple recommendation.
 
-The model identifies key factors affecting loan default probability and provides a reliable credit scoring mechanism. Key insights include:
-
-- Past payment delinquencies are strong predictors of future defaults
-- Age and income level significantly impact default probability
-- High debt ratios correlate with increased default risk
-
-## Output Files
-
-The script generates various visualization files including:
-- Feature importance analysis
-- ROC and precision-recall curves
-- Confusion matrix
-- Distribution plots of key variables
+## Results (CLI)
+The script saves:
+- confusion_matrix.png
+- roc_curve.png
+- precision_recall_curve.png
+- feature_importance.png
+- age_distribution.png, debt_ratio_distribution.png, numerical_distributions.png, correlation_matrix.png
 
 ## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- The dataset is derived from real financial records (anonymized)
-- Special thanks to all contributors and reviewers
+MIT — see LICENSE.
 
 ## Contact
-
-For questions or feedback about this project, please open an issue on GitHub.
+Open an issue on GitHub for questions or suggestions.
